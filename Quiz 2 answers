@@ -1,0 +1,83 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+//        ArrayList<Player> playerList = new ArrayList<Player>();
+//
+//        playerList.add(new Player(123, "Ed Perez", 50));
+//        playerList.add(new Player(762, "Ayran Gauna", 30));
+//        playerList.add(new Player(121, "AJ Astilla", 1));
+//
+//        //System.out.println("Player at index 1 is" + playerList.get(1));
+//
+//        playerList.add(1, new Player(843, "Ramon Samson", 28));
+//
+//        System.out.println("\nDoes the list contain Ed Perez?");
+//        System.out.println(playerList.contains(new Player(123, "Ed Perez", 50)));
+//
+//        System.out.println("\nAfter adding Ramon Samson and Before removing");
+//        printArrayList(playerList);
+//
+//        playerList.remove(2);
+//
+//        System.out.println("\nAfter removing");
+//        printArrayList(playerList);
+//
+//        System.out.println("\nAJ Astilla can be found at index " +
+//                playerList.indexOf(new Player(121, "AJ Astilla", 1)));
+//
+//        System.out.println("new student can be found at index " +
+//                playerList.indexOf(new Player(123, "new student", 0)));
+
+        System.out.println("Linked List\n");
+
+        PlayerLinkedList playerLinkedList = new PlayerLinkedList();
+
+        playerLinkedList.addToFront(new Player(123, "Ed Perez", 50));
+        playerLinkedList.addToFront(new Player(762, "Ayran Gauna", 30));
+        playerLinkedList.addToFront(new Player(121, "AJ Astilla", 1));
+
+
+    }
+
+    public static void printArrayList(ArrayList<Player> array)
+    {
+        for (Player player : array)
+        {
+            System.out.println(player.toString());
+        }
+    }
+
+    public static void RemoveFirstElement(String args[])
+    {
+        System.out.println("Removed element is: " + playerLinkedList.removeFirst());
+        System.out.println("Final LinkedList:" + list);
+
+    }
+
+    public int count() {
+
+        public Node head;
+        public Node tail;
+        public int size;
+
+        Node temp = this.head;
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+
+    }
+
+    public static void indexcontains(String args[])
+    {
+        System.out.println("The first occurrence of Ed Perez is at index:"
+                + list.indexOf("Ed Perez"));
+        System.out.println("Does the List contain 'AJ Astilla': "
+                + list.contains("AJ Astilla"));
+
+    }
+}
