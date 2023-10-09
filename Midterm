@@ -1,0 +1,127 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+class Card{
+    private String name;
+
+    public Card(String name){
+        this.name = name;
+    }
+
+    public String GetCardName(){
+        return name;
+    }
+
+}
+
+class Stack{
+    private List<Card> cards = new ArrayList<>();
+
+    public void top (Card card){
+        cards.add(card);
+    }
+
+    public Card ret(){
+        if (!cards.isEmpty()){
+            int LastIndex = cards.size() - 1;
+            Card card = cards.get(LastIndex);
+            cards.remove(LastIndex);
+            return card;
+        }
+        return null;
+    }
+
+    public boolean isEmpty(){
+        return cards.isEmpty();
+    }
+
+    public int CardSize(){
+        return  cards.size();
+    }
+
+}
+
+public class Main{
+    public static void main(String[] args) {
+        Stack PlayerDeck = new Stack();
+        Stack DiscardedPile = new Stack();
+        Random random = new Random();
+
+        for (int i = 1; i <= 30; i++){
+            PlayerDeck.top(new Card("Card" + i));
+
+        }
+
+        int round = 1;
+        while (!PlayerDeck.isEmpty()){
+            System.out.println("Round " + round);
+            int command = random.nextInt(3);
+            int x = random.nextInt(5) + 1;
+
+            if (command == 0){
+                System.out.println("Draw " + x + " cards");
+                for (int i = 0; i < x; i++){
+                    Card DrawnCard = PlayerDeck.ret();
+                    if (DrawnCard != null){
+                        System.out.println("You drew: " + DrawnCard.GetCardName());
+                        DiscardedPile.top(DrawnCard);
+                    }
+                    else{
+                        System.out.println("No more cards in the player deck.");
+                        break;
+                    }
+
+                }
+
+            } else if (command == 1) {
+                if (!PlayerDeck.isEmpty()){
+                    System.out.println("Discard " + x + " cards");
+                    for (int i = 0; i < x; i++){
+                        Card DiscardedCard = PlayerDeck.ret();
+                        if (DiscardedCard != null){
+                            System.out.println("You discarded: " + DiscardedCard.GetCardName());
+                            DiscardedPile.top(DiscardedCard);
+                        }
+                        else {
+                            System.out.println("No more cards in the player deck.");
+                            break;
+                        }
+                    }
+                } else if (command == 2) {
+                    if (DiscardedPile.isEmpty()){
+                        System.out.println("Get " + x + " cards from the discarded pile");
+                        for (int i = 0; i < x; i++){
+                            Card RetrievedCard = DiscardedPile.ret();
+                            if (RetrievedCard != null){
+                                System.out.println("You retrieved: " + RetrievedCard.GetCardName());
+                                PlayerDeck.top(RetrievedCard);
+                            }
+                            else{
+                                System.out.println("No more cards in the discarded pile.");
+                                break;
+                            }
+                        }
+
+                        System.out.println("Player's Current Hand: ");
+                        if (!PlayerDeck.isEmpty()){
+                            for(int i = 0; i < PlayerDeck.CardSize(); i++){
+                                System.out.println(PlayerDeck.CardSize() - i + ". " + PlayerDeck.ret().GetCardName());
+                            }
+                        }
+                        else{
+                            System.out.println("No cards in the player's hand.");
+                        }
+                        System.out.println("Remaining Cards in Player Deck: " + PlayerDeck.CardSize());
+                        System.out.println("Cards in Discarded Pile: " + DiscardedPile.CardSize());
+                        System.out.println();
+                        round++;
+                    }
+
+                    System.out.println("Player deck is empty. Game over!");
+
+                }
+            }
+    }
+}
+}
