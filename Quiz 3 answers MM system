@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class MMSystem {
+    private List<Players> PlayerQueve = new ArrayList<>();
+    private List<Game> games = new ArrayList<>();
+    private int GamesMade = 0;
+    private Random r = new Random();
+
+    public void enqueuePlayers(int PlayerNumbers) {
+        for (int i = 0; i < PlayerNumbers; i++) {
+            Players player = new Players("Player" + i, "Player Name" + i);
+            PlayerQueve.add(player);
+        }
+
+    }
+
+    public void StartMatchmaking() {
+        while (GamesMade < 10) {
+            int playersPerTurn = r.nextInt(7) + 1;
+            enqueuePlayers(playersPerTurn);
+
+            if (PlayerQueve.size() >= 5) {
+                List<Players> matchedPlayers = new ArrayList<>();
+                for (int i = 0; i < 5; i++) {
+                    Players player = PlayerQueve.remove(0);
+                    matchedPlayers.add(player);
+                }
+                games.add(new Game(matchedPlayers));
+                GamesMade++;
+                System.out.println("Game " + GamesMade + " started.");
+            }
+
+        }
+    }
+}
