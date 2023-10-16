@@ -1,6 +1,12 @@
-public class Main {
-    public static void main(String[] args) {
-        MMSystem matchmakingSystem = new MMSystem();
-        matchmakingSystem.StartMatchmaking();
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+public class Players {
+    private String PlayerID;
+    private String PlayerName;
+
+    public Players(String PlayerID, String PlayerName) {
+        this.PlayerID = PlayerID;
+        this.PlayerName = PlayerName;
     }
 }
